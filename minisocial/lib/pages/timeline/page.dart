@@ -14,28 +14,36 @@ class TimelinePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // [timelineProvider]の値を監視(watch)し、値が変更されたら自動的に再ビルドされる
     // `watch`はプロバイダーの状態変更を検知してUIを更新する
-    final posts = ref.watch(timelineProvider);
+    // 戻り値は[AsyncValue<List<Post>>]型で、非同期データの状態(読込中/完了/エラー)を表現する
+    final postsAsync = ref.watch(timelineProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('タイムライン')),
-      body: ListView(
-        children:
-            posts
-                // postsリストの各要素に対して[PostCard]ウィジェットを生成
-                .map((post) => PostCard(username: 'user', text: post))
-                .toList(),
+
+      // 非同期データに応じて異なるUIを表示
+      // [AsyncValue]の`when`メソッドにより、データの状態に応じた表示を切り替える
+      body: postsAsync.when(
+        // データ取得成功時: 投稿リストを表示
+        data:
+            (posts) => ListView.builder(
+              itemCount: posts.length,
+              itemBuilder:
+                  (context, index) => PostCard(
+                    username: posts[index].pubkey,
+                    text: posts[index].content,
+                  ),
+            ),
+        // ロード中: ローディングインジケータを表示
+        loading: () => const Center(child: CircularProgressIndicator()),
+        // エラー発生時: エラーメッセージを表示
+        error: (error, stack) => Center(child: Text(error.toString())),
       ),
 
       // 画面右下に表示されるフローティングアクションボタン
-      // タップすると新しい投稿を追加する
       floatingActionButton: FloatingActionButton(
-        onPressed:
-            () => ref
-                // `read`メソッドは`watch`と異なり、値の変更を監視せず、単に現在の値を一度だけ読み取る(read)
-                // `notifier`を使用してプロバイダーの状態を変更するメソッドにアクセスする
-                .read(timelineProvider.notifier)
-                // プロバイダー内で定義された`addPost`メソッドを呼び出して投稿を追加
-                .addPost('投稿 ${posts.length + 1}'),
+        onPressed: () {
+          // 処理なし
+        },
         // プラスアイコンを表示
         child: const Icon(Icons.add),
       ),

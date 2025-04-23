@@ -1,25 +1,59 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:minisocial/entities/post.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 /// タイムラインの状態を管理するクラス
-/// [Notifier]クラスを継承し、リストの状態操作のロジックを提供する
-class TimelineNotifier extends Notifier<List<String>> {
+/// [StreamNotifier]を継承しており、WebSocketを通じて投稿データを取得し、状態として管理する
+class TimelineNotifier extends StreamNotifier<List<Post>> {
   @override
-  // 初期状態を構築するメソッド
-  // プロバイダーが初めて使用される時に呼び出される
-  List<String> build() => [];
+  // 状態を非同期ストリームとして構築するメソッド
+  Stream<List<Post>> build() async* {
+    // WebSocketサーバーに接続
+    final channel = WebSocketChannel.connect(
+      Uri.parse('wss://mini-relay-5b7atwsxwa-an.a.run.app'),
+    );
 
-  /// 新しい投稿をタイムラインに追加するメソッド
-  void addPost(String text) {
-    // 新しい状態を作成し、現在の状態を置き換える
-    // [text, ...state]は、最新の投稿を先頭に、既存の投稿を後ろに配置する
-    state = [text, ...state];
+    // 購読メッセージを作成して送信
+    // REQはリクエストを意味し、kindsは投稿種別、limitは取得数を指定
+    channel.sink.add(
+      jsonEncode([
+        'REQ',
+        'test',
+        {
+          'kinds': [1],
+          'limit': 50,
+        },
+      ]),
+    );
+
+    // 投稿を格納するリスト
+    final posts = <Post>[];
+
+    // WebSocketからのメッセージをストリームとして処理
+    await for (final message in channel.stream) {
+      // JSONメッセージをデコード
+      final decoded = jsonDecode(message as String);
+
+      // `EVENT`メッセージの場合のみ処理
+      if (decoded is List && decoded.length >= 3 && decoded[0] == 'EVENT') {
+        // 投稿データをPost型に変換
+        final post = Post.fromJson(decoded[2] as Map<String, dynamic>);
+        posts.add(post);
+        // `createdAt`でソート
+        posts.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+        // 変更不可のリストとして状態を通知
+        yield List.unmodifiable(posts);
+      }
+    }
   }
 }
 
 /// タイムラインの状態にアクセスするためのプロバイダー
-/// [NotifierProvider]は、[Notifier]クラスとその状態の型(今回は`List<String>`)を型引数に取る
-/// このプロバイダーを通じて、UIはタイムラインの状態を監視・操作できる
-final timelineProvider = NotifierProvider<TimelineNotifier, List<String>>(() {
-  // TimelineNotifierのインスタンスを返す
-  return TimelineNotifier();
-});
+/// [StreamNotifierProvider]を使用して、非同期ストリームとして状態を提供する
+final timelineProvider = StreamNotifierProvider<TimelineNotifier, List<Post>>(
+  () {
+    return TimelineNotifier();
+  },
+);
