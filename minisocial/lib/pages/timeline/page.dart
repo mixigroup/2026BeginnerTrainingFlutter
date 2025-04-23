@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minisocial/pages/timeline/components/post_card.dart';
 
 class TimelinePage extends StatelessWidget {
   const TimelinePage({super.key});
@@ -9,9 +10,9 @@ class TimelinePage extends StatelessWidget {
       appBar: AppBar(title: const Text('タイムライン')),
       body: ListView(
         children: const [
-          ListTile(title: Text('投稿1')),
-          ListTile(title: Text('投稿2')),
-          ListTile(title: Text('投稿3')),
+          PostCard(username: 'user1', text: '投稿1'),
+          PostCard(username: 'user2', text: '投稿2'),
+          PostCard(username: 'user3', text: '投稿3'),
         ],
       ),
     );
