@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:minisocial/pages/timeline/page.dart';
 import 'package:minisocial/themes/colors.dart';
 import 'package:minisocial/themes/fonts.dart';
 
 void main() {
-  runApp(const MyApp());
+  // [ProviderScope]でアプリケーションをラップして、Riverpodによる状態管理を有効にする
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

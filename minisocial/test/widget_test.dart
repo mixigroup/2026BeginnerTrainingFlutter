@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:minisocial/main.dart';
 
 void main() {
   testWidgets('adds a post to the timeline', (tester) async {
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const ProviderScope(child: MyApp()));
 
     expect(find.text('タイムライン'), findsOneWidget);
     expect(find.text('投稿 1'), findsNothing);
