@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:minisocial/pages/timeline/components/post_card.dart';
 import 'package:minisocial/pages/timeline/provider.dart';
 
@@ -41,9 +42,7 @@ class TimelinePage extends ConsumerWidget {
 
       // 画面右下に表示されるフローティングアクションボタン
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // 処理なし
-        },
+        onPressed: () => context.push('/compose'),
         // プラスアイコンを表示
         child: const Icon(Icons.add),
       ),

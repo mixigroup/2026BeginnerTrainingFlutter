@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:minisocial/pages/compose/provider.dart';
 
 class ComposePage extends ConsumerStatefulWidget {
@@ -31,6 +32,9 @@ class _ComposePageState extends ConsumerState<ComposePage> {
               await ref
                   .read(composeProvider.notifier)
                   .post(_textController.text);
+              if (context.mounted) {
+                context.pop();
+              }
             },
             icon: const Icon(Icons.send),
           ),
