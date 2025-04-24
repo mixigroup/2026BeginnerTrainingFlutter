@@ -1,3 +1,5 @@
+import 'package:minisocial/utils/nostr.dart';
+
 /// 投稿データを表現するエンティティクラス
 class Post {
   /// 投稿データ
@@ -20,6 +22,23 @@ class Post {
     );
   }
 
+  /// 新しい投稿データを生成するファクトリコンストラクタ
+  factory Post.create({
+    required String privateKey,
+    required String pubkey,
+    required int createdAt,
+    required String content,
+  }) {
+    final id = generateEventId(pubkey, createdAt, 1, <String>[], content);
+    return Post(
+      id: id,
+      pubkey: pubkey,
+      createdAt: createdAt,
+      content: content,
+      sig: signEvent(privateKey, id),
+    );
+  }
+
   /// イベントID. シリアライズされたデータの32バイトSHA256ハッシュ
   final String id;
 
@@ -34,4 +53,17 @@ class Post {
 
   /// 64バイトSchnorr署名
   final String sig;
+
+  /// 投稿データをNostrのJSONデータに変換
+  Map<String, dynamic> toEventJson() {
+    return {
+      'id': id,
+      'pubkey': pubkey,
+      'created_at': createdAt,
+      'kind': 1, // 投稿
+      'tags': <String>[], // タグは未実装
+      'content': content,
+      'sig': sig,
+    };
+  }
 }
