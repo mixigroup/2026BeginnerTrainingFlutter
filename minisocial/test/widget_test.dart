@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minisocial/entities/post.dart';
-
-import 'package:minisocial/main.dart';
 import 'package:minisocial/pages/timeline/provider.dart';
+import 'package:minisocial/router.dart';
 
 class _FakeTimelineNotifier extends TimelineNotifier {
   @override
@@ -11,15 +11,20 @@ class _FakeTimelineNotifier extends TimelineNotifier {
 }
 
 void main() {
-  testWidgets('shows the timeline', (tester) async {
+  testWidgets('TimelinePageで投稿ボタンを押すとComposePageに遷移する', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [timelineProvider.overrideWith(_FakeTimelineNotifier.new)],
-        child: const MyApp(),
+        child: MaterialApp.router(routerConfig: router),
       ),
     );
     await tester.pump();
 
     expect(find.text('タイムライン'), findsOneWidget);
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
+    expect(find.text('投稿作成'), findsOneWidget);
   });
 }
