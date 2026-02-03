@@ -2,7 +2,7 @@
 
 # Flutter研修
 
-## 2025/04/24 MIXI 25新卒技術研修
+## MIXI 26新卒技術研修
 
 ## 川瀬 寛也
 
@@ -28,10 +28,10 @@
 
 - [mise](https://mise.jdx.dev/getting-started.html)
     - 各ランタイムのバージョンを管理するツールです
-- [Xcode](https://developer.apple.com/xcode/resources/) 16.3
+- [Xcode](https://developer.apple.com/xcode/resources/) 26.2
     - ダウンロードにはApple IDが必要です
     - [xcodes](https://github.com/XcodesOrg/xcodes) を使ってインストールするのがおすすめです
-- [Android Studio](https://developer.android.com/studio) 2024.3
+- [Android Studio](https://developer.android.com/studio) 2025.2
 
 <!--
 Getting Started | mise-en-place https://mise.jdx.dev/getting-started.html
@@ -48,8 +48,8 @@ Download Android Studio & App Tools - Android Developers https://developer.andro
 
 ```sh
 # このリポジトリをクローン
-git clone https://github.com/mixigroup/2025BeginnerTrainingFlutter.git
-cd 2025BeginnerTrainingFlutter
+git clone https://github.com/mixigroup/2026BeginnerTrainingFlutter.git
+cd 2026BeginnerTrainingFlutter
 
 # Rosetta2をインストール
 sudo softwareupdate --install-rosetta --agree-to-license
@@ -71,13 +71,11 @@ mise install
 ```sh
 › flutter doctor
 Doctor summary (to see all details, run flutter doctor -v):
-[✓] Flutter (Channel stable, 3.29.3, on macOS 15.4 24E248 darwin-arm64, locale ja-JP)
-[✓] Android toolchain - develop for Android devices (Android SDK version 35.0.0)
-[✓] Xcode - develop for 10S and macOS (Xcode 16.3)
+[✓] Flutter (Channel stable, 3.38.9, on macOS 15.7.3 24G419 darwin-arm64, locale ja-JP)
+[✓] Android toolchain - develop for Android devices (Android SDK version 36.1.0)
+[✓] Xcode - develop for iOS and macOS (Xcode 26.2)
 [✓] Chrome - develop for the web
-[✓] Android Studio (version 2024.3)
-[✓] VS Code (version 1.99.3)
-[✓] Connected device (3 available)
+[✓] Connected device (2 available)
 [✓] Network resources
 
 • No issues found!

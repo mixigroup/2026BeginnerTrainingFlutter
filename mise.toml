@@ -1,9 +1,9 @@
-min_version = "2025.4.0"
+min_version = "2026.2.0"
 
 [settings]
 experimental = true
 
 [tools]
-flutter = "3.29.3"
+"asdf:mise-plugins/mise-flutter" = "3.38.9-stable"
 "gem:cocoapods" = "1.16.2"
-ruby = "3.4.2"
+ruby = "4.0.1"

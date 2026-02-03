@@ -1,4 +1,4 @@
-# 2025年 Flutter研修
+# 2026年 Flutter研修
 
 ## 事前準備
 
@@ -7,17 +7,17 @@
 - [mise](https://mise.jdx.dev/getting-started.html)
     - 各ランタイムのバージョンを管理するツールです
     - 利用したくない場合は、[`mise.toml`](./mise.toml) を見てそれぞれインストールしてください
-- [Xcode](https://developer.apple.com/xcode/resources/) 16.3
+- [Xcode](https://developer.apple.com/xcode/resources/) 26.2
     - ダウンロードにはApple IDが必要です
     - [xcodes](https://github.com/XcodesOrg/xcodes) を使ってインストールするのがおすすめです
-- [Android Studio](https://developer.android.com/studio) 2024.3
+- [Android Studio](https://developer.android.com/studio) 2025.2
 
 ### セットアップ
 
 ```sh
 # このリポジトリをクローン
-git clone https://github.com/mixigroup/2025BeginnerTrainingFlutter.git
-cd 2025BeginnerTrainingFlutter
+git clone https://github.com/mixigroup/2026BeginnerTrainingFlutter.git
+cd 2026BeginnerTrainingFlutter
 ```
 
 ```sh
@@ -41,13 +41,11 @@ mise install
 ```sh
 ❯ flutter doctor
 Doctor summary (to see all details, run flutter doctor -v):
-[✓] Flutter (Channel stable, 3.29.3, on macOS 15.4 24E248 darwin-arm64, locale ja-JP)
-[✓] Android toolchain - develop for Android devices (Android SDK version 35.0.0)
-[✓] Xcode - develop for iOS and macOS (Xcode 16.3)
+[✓] Flutter (Channel stable, 3.38.9, on macOS 15.7.3 24G419 darwin-arm64, locale ja-JP)
+[✓] Android toolchain - develop for Android devices (Android SDK version 36.1.0)
+[✓] Xcode - develop for iOS and macOS (Xcode 26.2)
 [✓] Chrome - develop for the web
-[✓] Android Studio (version 2024.3)
-[✓] VS Code (version 1.99.3)
-[✓] Connected device (3 available)
+[✓] Connected device (2 available)
 [✓] Network resources
 
 • No issues found!
