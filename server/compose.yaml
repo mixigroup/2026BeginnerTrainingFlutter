@@ -5,9 +5,7 @@ services:
     ports:
       - "7777:8080"
     tmpfs:
-      - /tmp
+      - /tmp/db
     restart: unless-stopped
     volumes:
       - ./dump:/dump
-    command: >
-      sh -c "mkdir -p /tmp/db && strfry relay"
