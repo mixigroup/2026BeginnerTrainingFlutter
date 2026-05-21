@@ -28,14 +28,15 @@
 
 - [mise](https://mise.jdx.dev/getting-started.html)
     - 各ランタイムのバージョンを管理するツールです
-- [Xcode](https://developer.apple.com/xcode/resources/) 26.2
+- [Xcode](https://developer.apple.com/support/xcode/) 26.3
     - ダウンロードにはApple IDが必要です
     - [xcodes](https://github.com/XcodesOrg/xcodes) を使ってインストールするのがおすすめです
-- [Android Studio](https://developer.android.com/studio) 2025.2
+    - Xcode 26.3 は macOS Sequoia 15.6 以降で利用できます
+- [Android Studio](https://developer.android.com/studio) Panda 4 | 2025.3.4 Patch 1
 
 <!--
 Getting Started | mise-en-place https://mise.jdx.dev/getting-started.html
-Resources - Xcode - Apple Developer https://developer.apple.com/xcode/resources/
+Xcode - Support - Apple Developer https://developer.apple.com/support/xcode/
 XcodesOrg/xcodes: The best command-line tool to install and switch between multiple versions of Xcode. https://github.com/XcodesOrg/xcodes
 Download Android Studio & App Tools - Android Developers https://developer.android.com/studio
 -->
@@ -71,9 +72,9 @@ mise install
 ```sh
 › flutter doctor
 Doctor summary (to see all details, run flutter doctor -v):
-[✓] Flutter (Channel stable, 3.38.9, on macOS 15.7.3 24G419 darwin-arm64, locale ja-JP)
+[✓] Flutter (Channel stable, 3.44.0, on macOS 15.7.7 24G720 darwin-arm64, locale ja-JP)
 [✓] Android toolchain - develop for Android devices (Android SDK version 36.1.0)
-[✓] Xcode - develop for iOS and macOS (Xcode 26.2)
+[✓] Xcode - develop for iOS and macOS (Xcode 26.3)
 [✓] Chrome - develop for the web
 [✓] Connected device (2 available)
 [✓] Network resources
@@ -221,8 +222,8 @@ Unity Real-Time Development Platform | 3D, 2D, VR & AR Engine https://unity.com/
 - Googleが開発・保守するクロスプラットフォームUIフレームワーク
     - 2014年に Sky として開発開始、2018年にFlutter 1.0リリース
 - 単一コードベースで iOS / Android™ / Web / Windows / macOS / Linux / (Fuchsia) に対応
-- 世界中で 100万人以上 の月間アクティブ開発者
-- 新規iOSアプリの 約30% がFlutterで構築されている（2024年）
+- 公開されている直近の公式発信では、世界中で 100万人以上 の月間アクティブ開発者
+- 同じく2024年時点で、新規iOSアプリの 約30% がFlutterで構築されている
 
 <!--
 Flutter-on-Fuchsia Velocity https://fuchsia.dev/fuchsia-src/contribute/roadmap/2021/flutter_on_fuchsia_velocity
@@ -502,10 +503,10 @@ Inside Flutter | Flutter https://docs.flutter.dev/resources/inside-flutter
     - Vulkan/MetalなどのモダングラフィックスAPIを積極的に活用
     - シェーダーの事前コンパイルで描画の一貫性とフレーム飛びを抑制
 
-> Flutter 3.27以降、iOS/AndroidでImpellerがデフォルトに
+> Flutter 3.27以降、iOSとAndroid API 29+でImpellerがデフォルトに
 
 <!--
-Impeller Availability https://docs.google.com/spreadsheets/d/1AebMvprRkxP-D6ndx920lbvDBbhg-sNNRJ64XY2P2t0/edit?gid=0#gid=0
+Impeller rendering engine | Flutter https://docs.flutter.dev/perf/impeller
 -->
 
 ---
@@ -956,6 +957,7 @@ class TimelineNotifier extends StreamNotifier<List<Post>> {
         final channel = WebSocketChannel.connect(
             Uri.parse('wss://mini-relay-5b7atwsxwa-an.a.run.app'),
         );
+        await channel.ready;
 
         channel.sink.add(
             jsonEncode([
@@ -1308,6 +1310,7 @@ class ComposeNotifier extends AsyncNotifier<void> {
         _channel = WebSocketChannel.connect(
             Uri.parse('wss://mini-relay-5b7atwsxwa-an.a.run.app'),
         );
+        await _channel.ready;
     }
 
     Future<void> post(String content) async {

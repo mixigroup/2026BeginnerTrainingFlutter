@@ -7,10 +7,11 @@
 - [mise](https://mise.jdx.dev/getting-started.html)
     - 各ランタイムのバージョンを管理するツールです
     - 利用したくない場合は、[`mise.toml`](./mise.toml) を見てそれぞれインストールしてください
-- [Xcode](https://developer.apple.com/xcode/resources/) 26.2
+- [Xcode](https://developer.apple.com/support/xcode/) 26.3
     - ダウンロードにはApple IDが必要です
     - [xcodes](https://github.com/XcodesOrg/xcodes) を使ってインストールするのがおすすめです
-- [Android Studio](https://developer.android.com/studio) 2025.2
+    - Xcode 26.3 は macOS Sequoia 15.6 以降で利用できます
+- [Android Studio](https://developer.android.com/studio) Panda 4 | 2025.3.4 Patch 1
 
 ### セットアップ
 
@@ -36,14 +37,14 @@ mise install
 ./setup.sh
 ```
 
-`flutter doctor` を実行して、以下のように表示されればOKです (上記で指定していないツールのバージョンは違っても大丈夫です)
+`flutter doctor` を実行して、主要項目が以下のように `✓` になればOKです (上記で指定していないツールのバージョンは違っても大丈夫です)
 
 ```sh
 ❯ flutter doctor
 Doctor summary (to see all details, run flutter doctor -v):
-[✓] Flutter (Channel stable, 3.38.9, on macOS 15.7.3 24G419 darwin-arm64, locale ja-JP)
+[✓] Flutter (Channel stable, 3.44.0, on macOS 15.7.7 24G720 darwin-arm64, locale ja-JP)
 [✓] Android toolchain - develop for Android devices (Android SDK version 36.1.0)
-[✓] Xcode - develop for iOS and macOS (Xcode 26.2)
+[✓] Xcode - develop for iOS and macOS (Xcode 26.3)
 [✓] Chrome - develop for the web
 [✓] Connected device (2 available)
 [✓] Network resources
