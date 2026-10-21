@@ -8,7 +8,7 @@ ARG STRFRY_VERSION=1.1.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  ca-certificates=20260223 \
+  ca-certificates=20260816ubuntu0.26.04.1 \
   g++=4:15.2.0-5ubuntu1 \
   git=1:2.53.0-1ubuntu1 \
   libflatbuffers-dev=23.5.26+dfsg-4build1 \
